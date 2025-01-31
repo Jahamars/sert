@@ -1,0 +1,13 @@
+[github](https://github.com/jahamars/)
+[Course Certificates](https://github.com/Jahamars/sert/tree/main/course-certificates)  
+[Participation certificates](https://github.com/Jahamars/sert/tree/main/participation-certificates)
+[blog](https://mars.mixa.site/projects)
+[web-resume](https://jahamars.github.io/)
+
+
+
+[cybrary](https://app.cybrary.it/profile/jahamarsi)
+[dockerhub](https://hub.docker.com/u/jahamars)
+[gitlab](https://gitlab.com/jahamarsi1)
+[codepen](https://codepen.io/jahamarsi)
+[credly](https://www.credly.com/users/jahongir/)
