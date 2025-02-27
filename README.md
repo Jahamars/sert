@@ -1,5 +1,6 @@
 ### [Course Certificates](https://github.com/Jahamars/sert/tree/main/course-certificates)  
 ### [Participation certificates](https://github.com/Jahamars/sert/tree/main/participation-certificates)
+### [Resume](https://github.com/Jahamars/sert/tree/main/resume)  
 
 ---
 
