@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио сертификатов</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f5f7fa;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .category-btn.active {
+            background-color: #2c3e50;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .certificate-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .certificate-preview {
+            height: 200px;
+            width: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .certificate-preview img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .placeholder-image {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .certificate-details {
+            padding: 1rem;
+        }
+
+        .certificate-details h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .certificate-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            height: 80%;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        #pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .certificates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Портфолио сертификатов</h1>
+        <p>Коллекция моих сертификатов и достижений</p>
+    </header>
+
+    <div class="container">
+        <div class="categories">
+            <button class="category-btn active" data-category="all">Все сертификаты</button>
+            <button class="category-btn" data-category="course-certificates">Курсы</button>
+            <button class="category-btn" data-category="participation-certificates">Участие</button>
+            <button class="category-btn" data-category="trainings">Тренинги</button>
+            <button class="category-btn" data-category="resume">Резюме</button>
+        </div>
+
+        <div class="certificates-grid" id="certificates-container">
+            <!-- Сертификаты будут загружены через JavaScript -->
+        </div>
+    </div>
+
+    <div id="certificateModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="pdf-viewer"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Портфолио сертификатов - Все права защищены</p>
+    </footer>
+
+    <script>
+        // Структура данных для сертификатов
+        const certificatesData = {
+            "course-certificates": [
+                { name: "Astra Linux Administration", path: "course-certificates/astra-linux-admin.pdf" },
+                { name: "Astra Linux User", path: "course-certificates/astra-linux-user.pdf" },
+                { name: "Braim IT Administrator", path: "course-certificates/braim-itadmin.pdf" },
+                { name: "Braim SQL", path: "course-certificates/braim-sql.pdf" },
+                { name: "Cisco Cybersecurity", path: "course-certificates/cisco-cybersecurity-Es.pdf" },
+                { name: "Le Wagon Docker", path: "course-certificates/lewagon-docker.pdf" },
+                { name: "Netology Cybersecurity", path: "course-certificates/netology-cybersec0.pdf" },
+                { name: "Netology Database", path: "course-certificates/netology-db0.pdf" },
+                { name: "Sangoma Asterisk Certified Essentials", path: "course-certificates/sangoma-asterisk-certified-essentials.pdf" },
+                { name: "Stepik Ansible", path: "course-certificates/stepik-ansible.pdf" },
+                { name: "Stepik Docker", path: "course-certificates/stepik-docker.pdf" },
+                { name: "TLF Kubernetes", path: "course-certificates/TLF-Kuber.pdf" },
+                { name: "TLF XSS", path: "course-certificates/TLF-XSS.pdf" },
+                { name: "Yandex Cloud Engineer", path: "course-certificates/yandex-cloud-engineer.pdf" }
+            ],
+            "participation-certificates": [
+                { name: "Astra Linux Administration — IT Planet 2025", path: "participation-certificates/Astra-linux-Administration—IT-Planet-2025.pdf" },
+                { name: "DevOps (Траектория будущего 2024-2025)", path: "participation-certificates/devops(Траектория-будущего-2024-2025).pdf" },
+                { name: "InfoSec IT Planet 2025", path: "participation-certificates/Infosec-IT-Planet-2025.pdf" },
+                { name: "InfoSec (Траектория будущего 2024-2025)", path: "participation-certificates/infosec(Траектория-будущего-2024-2025).pdf" },
+                { name: "Network IT Planet 2025", path: "participation-certificates/Network-IT-Planet-2025.pdf" },
+                { name: "Participating Astra", path: "participation-certificates/participating-Astra.pdf" },
+                { name: "RedOS Administration — IT Planet 2025", path: "participation-certificates/REDOS-Administration—IT-Planet-2025.pdf" },
+                { name: "Полуфинал InfoSec (Траектория будущего 2024-2025)", path: "participation-certificates/semifinal-infosec(Траектория-будущего-2024-2025).pdf" }
+            ],
+            "trainings": [
+                { name: "Cybrary CASP Security Architecture", path: "trainings/cybrary-casp-security-architecture.pdf" },
+                { name: "Cybrary Cryptography", path: "trainings/cybrary-cryptography.pdf" },
+                { name: "Cybrary Network Communication Security", path: "trainings/cybrary-network-comunication-sec.pdf" },
+                { name: "Cybrary Web Application Hacking", path: "trainings/cybrary-web-application-hacking.pdf" }
+            ],
+            "resume": [
+                { name: "Резюме Facultetus", path: "resume/facultetus.pdf" },
+                { name: "Резюме HH", path: "resume/hh.pdf" }
+            ]
+        };
+
+        // Получаем контейнер для сертификатов
+        const certificatesContainer = document.getElementById('certificates-container');
+        const modal = document.getElementById('certificateModal');
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Функция для создания карточки сертификата
+        function createCertificateCard(certificate, category) {
+            const card = document.createElement('div');
+            card.className = `certificate-card ${category}`;
+            
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'certificate-preview';
+            
+            // Здесь можно добавить реальное превью PDF, но для простоты используем placeholder
+            const placeholderDiv = document.createElement('div');
+            placeholderDiv.className = 'placeholder-image';
+            placeholderDiv.textContent = certificate.name.substring(0, 2).toUpperCase();
+            previewDiv.appendChild(placeholderDiv);
+            
+            const detailsDiv = document.createElement('div');
+            detailsDiv.className = 'certificate-details';
+            
+            const title = document.createElement('h3');
+            title.textContent = certificate.name;
+            
+            const categoryP = document.createElement('p');
+            categoryP.textContent = getCategoryDisplayName(category);
+            
+            const viewBtn = document.createElement('a');
+            viewBtn.href = "#";
+            viewBtn.className = 'view-btn';
+            viewBtn.textContent = 'Просмотреть';
+            viewBtn.onclick = function(e) {
+                e.preventDefault();
+                openCertificate(certificate.path);
+            };
+            
+            detailsDiv.appendChild(title);
+            detailsDiv.appendChild(categoryP);
+            detailsDiv.appendChild(viewBtn);
+            
+            card.appendChild(previewDiv);
+            card.appendChild(detailsDiv);
+            
+            return card;
+        }
+
+        // Функция для отображения категории в дружественном формате
+        function getCategoryDisplayName(category) {
+            const categoryMap = {
+                'course-certificates': 'Курсы',
+                'participation-certificates': 'Участие',
+                'trainings': 'Тренинги',
+                'resume': 'Резюме'
+            };
+            return categoryMap[category] || category;
+        }
+
+        // Функция для открытия сертификата в модальном окне
+        function openCertificate(path) {
+            pdfViewer.src = path;
+            modal.style.display = 'block';
+        }
+
+        // Закрыть модальное окно при клике на крестик
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Закрыть модальное окно при клике вне его содержимого
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Функция для загрузки всех сертификатов
+        function loadAllCertificates() {
+            certificatesContainer.innerHTML = '';
+            
+            Object.keys(certificatesData).forEach(category => {
+                certificatesData[category].forEach(certificate => {
+                    const card = createCertificateCard(certificate, category);
+                    certificatesContainer.appendChild(card);
+                });
+            });
+        }
+
+        // Функция для загрузки сертификатов определенной категории
+        function loadCertificatesByCategory(category) {
+            certificatesContainer.innerHTML = '';
+            
+            if (category === 'all') {
+                loadAllCertificates();
+                return;
+            }
+            
+            certificatesData[category].forEach(certificate => {
+                const card = createCertificateCard(certificate, category);
+                certificatesContainer.appendChild(card);
+            });
+        }
+
+        // Добавляем обработчики событий для кнопок категорий
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активный класс со всех кнопок
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Добавляем активный класс на текущую кнопку
+                this.classList.add('active');
+                // Загружаем сертификаты выбранной категории
+                loadCertificatesByCategory(this.dataset.category);
+            });
+        });
+
+        // Загружаем все сертификаты при загрузке страницы
+        window.onload = loadAllCertificates;
+    </script>
+</body>
+</html>
