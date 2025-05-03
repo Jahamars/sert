@@ -374,55 +374,54 @@
     <footer>
         <p>© 2024 | Jahongir Ahmdaliev | <span id="current-date"></span></p>
     </footer>
+
     <script>
         // Обновление даты в футере
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('ru-RU');
         
         // Структура данных для сертификатов
         const certificatesData = {
-            "course-certificates": [
-                { name: "Astra Linux Administration", path: "course-certificates/astra-linux-admin.pdf" },
-                { name: "Astra Linux User", path: "course-certificates/astra-linux-user.pdf" },
-                { name: "Braim IT Administrator", path: "course-certificates/braim-itadmin.pdf" },
-                { name: "Braim SQL", path: "course-certificates/braim-sql.pdf" },
-                { name: "Cisco Cybersecurity", path: "course-certificates/cisco-cybersecurity-Es.pdf" },
-                { name: "Le Wagon Docker", path: "course-certificates/lewagon-docker.pdf" },
-                { name: "Netology Cybersecurity", path: "course-certificates/netology-cybersec0.pdf" },
-                { name: "Netology Database", path: "course-certificates/netology-db0.pdf" },
-                { name: "Sangoma Asterisk Certified Essentials", path: "course-certificates/sangoma-asterisk-certified-essentials.pdf" },
-                { name: "Stepik Ansible", path: "course-certificates/stepik-ansible.pdf" },
-                { name: "Stepik Docker", path: "course-certificates/stepik-docker.pdf" },
-                { name: "TLF Kubernetes", path: "course-certificates/TLF-Kuber.pdf" },
-                { name: "TLF XSS", path: "course-certificates/TLF-XSS.pdf" },
-                { name: "Yandex Cloud Engineer", path: "course-certificates/yandex-cloud-engineer.pdf" }
-            ],
-            "participation-certificates": [
-                { name: "Astra Linux Administration — IT Planet 2025", path: "participation-certificates/Astra-linux-Administration—IT-Planet-2025.pdf" },
-                { name: "DevOps (Траектория будущего 2024-2025)", path: "participation-certificates/final-DevOps(Траектория-будущего-2024-2025).pdf" },
-                { name: "InfoSec IT Planet 2025", path: "participation-certificates/Infosec-IT-Planet-2025.pdf" },
-                { name: "InfoSec (Траектория будущего 2024-2025)", path: "participation-certificates/infosec(Траектория-будущего-2024-2025).pdf" },
-                { name: "Network IT Planet 2025", path: "participation-certificates/Network-IT-Planet-2025.pdf" },
-                { name: "Participating Astra", path: "participation-certificates/participating-Astra.pdf" },
-                { name: "RedOS Administration — IT Planet 2025", path: "participation-certificates/REDOS-Administration—IT-Planet-2025.pdf" },
-                { name: "InfoSec Final (Траектория будущего 2025)", path: "participation-certificates/final-infosec(Траектория-будущего-2025).pdf" }
-            ],
-            "trainings": [
-                { name: "Cybrary CASP Security Architecture", path: "trainings/cybrary-casp-security-architecture.pdf" },
-                { name: "Cybrary Cryptography", path: "trainings/cybrary-cryptography.pdf" },
-                { name: "Cybrary Network Communication Security", path: "trainings/cybrary-network-comunication-sec.pdf" },
-                { name: "Cybrary Web Application Hacking", path: "trainings/cybrary-web-application-hacking.pdf" }
-            ],
-            "resume": [
-                { name: "English Resume", path: "resume/en.pdf" },
-                { name: "Резюме Facultetus", path: "resume/facultetus.pdf" },
-                { name: "Резюме HH", path: "resume/hh.ru.pdf" }
-            ],
-            "certificates-ctl": [
-                { name: "EF SET Certificate", path: "Certificates ctl/EF SET Certificate.pdf" }
-            ]
-    };
-</script>
-    };
+        "course-certificates": [
+            { name: "Astra Linux Administration", path: "course-certificates/astra-linux-admin.pdf" },
+            { name: "Astra Linux User", path: "course-certificates/astra-linux-user.pdf" },
+            { name: "Braim IT Administrator", path: "course-certificates/braim-itadmin.pdf" },
+            { name: "Braim SQL", path: "course-certificates/braim-sql.pdf" },
+            { name: "Cisco Cybersecurity", path: "course-certificates/cisco-cybersecurity-Es.pdf" },
+            { name: "Le Wagon Docker", path: "course-certificates/lewagon-docker.pdf" },
+            { name: "Netology Cybersecurity", path: "course-certificates/netology-cybersec0.pdf" },
+            { name: "Netology Database", path: "course-certificates/netology-db0.pdf" },
+            { name: "Sangoma Asterisk Certified Essentials", path: "course-certificates/sangoma-asterisk-certified-essentials.pdf" },
+            { name: "Stepik Ansible", path: "course-certificates/stepik-ansible.pdf" },
+            { name: "Stepik Docker", path: "course-certificates/stepik-docker.pdf" },
+            { name: "TLF Kubernetes", path: "course-certificates/TLF-Kuber.pdf" },
+            { name: "TLF XSS", path: "course-certificates/TLF-XSS.pdf" },
+            { name: "Yandex Cloud Engineer", path: "course-certificates/yandex-cloud-engineer.pdf" }
+        ],
+        "participation-certificates": [
+            { name: "Astra Linux Administration — IT Planet 2025", path: "participation-certificates/Astra-linux-Administration—IT-Planet-2025.pdf" },
+            { name: "DevOps (Траектория будущего 2024-2025)", path: "participation-certificates/final-DevOps(Траектория-будущего-2024-2025).pdf" },
+            { name: "InfoSec IT Planet 2025", path: "participation-certificates/Infosec-IT-Planet-2025.pdf" },
+            { name: "InfoSec (Траектория будущего 2024-2025)", path: "participation-certificates/infosec(Траектория-будущего-2024-2025).pdf" },
+            { name: "Network IT Planet 2025", path: "participation-certificates/Network-IT-Planet-2025.pdf" },
+            { name: "Participating Astra", path: "participation-certificates/participating-Astra.pdf" },
+            { name: "RedOS Administration — IT Planet 2025", path: "participation-certificates/REDOS-Administration—IT-Planet-2025.pdf" },
+            { name: "InfoSec Final (Траектория будущего 2025)", path: "participation-certificates/final-infosec(Траектория-будущего-2025).pdf" }
+        ],
+        "trainings": [
+            { name: "Cybrary CASP Security Architecture", path: "trainings/cybrary-casp-security-architecture.pdf" },
+            { name: "Cybrary Cryptography", path: "trainings/cybrary-cryptography.pdf" },
+            { name: "Cybrary Network Communication Security", path: "trainings/cybrary-network-comunication-sec.pdf" },
+            { name: "Cybrary Web Application Hacking", path: "trainings/cybrary-web-application-hacking.pdf" }
+        ],
+        "resume": [
+            { name: "English Resume", path: "resume/en.pdf" },
+            { name: "Резюме Facultetus", path: "resume/facultetus.pdf" },
+            { name: "Резюме HH", path: "resume/hh.ru.pdf" }
+        ],
+        "certificates-ctl": [
+            { name: "EF SET Certificate", path: "Certificates ctl/EF SET Certificate.pdf" }
+        ]
+    }; 
 
         // Получаем элементы DOM
         const certificatesContainer = document.getElementById('certificates-container');
