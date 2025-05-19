@@ -310,6 +310,17 @@
                 height: 85%;
                 margin: 5% auto;
             }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.7rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }           
+
         }
 
         @media (max-width: 480px) {
@@ -342,21 +353,77 @@
                 padding: 0.5rem;
             }
         }
+
+        /* Navigation Bar Styles */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            background-color: var(--card-background);
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn {
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .nav-btn i {
+            font-size: 1.1rem;
+        }
+
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <h1>Achievements</h1>
-        <p>Jahogir Ahmdaliev</p>
+        <h1>Jahogir Ahmdaliev</h1>
     </header>
 
     <div class="container">
+        
+        <div class="nav-buttons">
+            <a href="https://jahamars.github.io/" target="_blank" class="nav-btn">
+                <i class="fas fa-laptop-code"></i> Web Resume
+            </a>
+            <a href="https://jmee.netlify.app/about/" target="_blank" class="nav-btn">
+                <i class="fas fa-blog"></i> Blog
+            </a>
+        </div>
+
         <div class="categories">
-            <button class="category-btn active" data-category="all">Все</button>
-            <button class="category-btn" data-category="course-certificates">Курсы</button>
-            <button class="category-btn" data-category="participation-certificates">Участие</button>
-            <button class="category-btn" data-category="trainings">Тренинги</button>
-            <button class="category-btn" data-category="resume">Резюме</button>
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="course-certificates">Courses</button>
+            <button class="category-btn" data-category="participation-certificates">Participation</button>
+            <button class="category-btn" data-category="victories">Victories</button>
+            <button class="category-btn" data-category="certificates-ctl">Confirmation</button>
+            <button class="category-btn" data-category="resume">Resume</button>
+            <button class="category-btn" data-category="trainings">Training</button>
         </div>
 
         <div class="certificates-grid" id="certificates-container">
@@ -421,6 +488,9 @@
         ],
         "certificates-ctl": [
             { name: "EF SET Certificate", path: "Certificates ctl/EF SET Certificate.pdf" }
+        ],
+        "victories": [
+            { name: "2nd-place-winner-DevOps", path: "participation-certificates/2nd-place-winner-DevOps.pdf" }
         ]
     }; 
 
@@ -433,10 +503,12 @@
 
         // Отображение имени категории
         const categoryDisplayNames = {
-            'course-certificates': 'Курсы',
-            'participation-certificates': 'Участие',
-            'trainings': 'Тренинги',
-            'resume': 'Резюме'
+            'course-certificates': 'Courses',
+            'participation-certificates': 'Participation',
+            'trainings': 'Trainings',
+            'resume': 'Resume',
+            'victories': 'Victories',
+            'certificates-ctl': 'Confirmation'
         };
 
         // Создание карточки сертификата
@@ -456,7 +528,7 @@
                 <div class="certificate-details">
                     <h3>${certificate.name}</h3>
                     <p class="certificate-meta">${categoryDisplayNames[category] || category}</p>
-                    <a href="#" class="view-btn">Просмотреть</a>
+                    <a href="#" class="view-btn">Open</a>
                 </div>
             `;
             
